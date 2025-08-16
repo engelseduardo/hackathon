@@ -1,0 +1,76 @@
+/* UI simples e grande para produtor rural */
+:root{
+  --bg:#0f1115; --card:#161a22; --text:#eef2f7; --muted:#9aa6b2; --accent:#53c1ff;
+  --radius:18px; --shadow:0 10px 30px rgba(0,0,0,.35);
+}
+*{box-sizing:border-box}
+body{margin:0;background:linear-gradient(180deg,#0f1115,#0b0d11);color:var(--text);
+  font:17px/1.5 system-ui,-apple-system,Segoe UI,Roboto}
+.container{max-width:1000px;margin:0 auto;padding:20px}
+.head h1{font-size:clamp(26px,4vw,40px);margin:6px 0 0}
+.subtitle{color:var(--muted);margin:0}
+
+.stepper{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin:16px 0}
+.step{
+  background:#0d1118;padding:10px;border-radius:12px;border:1px solid rgba(255,255,255,.06);
+  text-align:center;color:var(--muted);font-weight:600
+}
+.step span{display:inline-grid;place-items:center;background:#19202c;border-radius:50%;width:24px;height:24px;margin-right:6px}
+.step.active{color:#fff;border-color:#2b9fe8}
+
+.card{
+  background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);
+  padding:18px;border:1px solid rgba(255,255,255,.06);margin-bottom:14px
+}
+.card.inner{background:#0f141c}
+
+.grid{display:grid;gap:12px}
+.grid.two{grid-template-columns:1fr 1fr}
+.grid.three{grid-template-columns:repeat(3,1fr)}
+@media(max-width:780px){.grid.two,.grid.three{grid-template-columns:1fr}}
+
+.row{display:flex;flex-direction:column;gap:6px}
+label{font-weight:700}
+input,select,button{
+  background:#0d1118;color:#fff;border:1px solid rgba(255,255,255,.10);
+  border-radius:12px;padding:12px 14px;font-size:16px
+}
+input:focus,select:focus{outline:none;border-color:var(--accent)}
+
+.btn{background:linear-gradient(135deg,#2bb7ff,#6fe1ff);color:#07131b;border:none;font-weight:800;cursor:pointer}
+.btn.ghost{background:transparent;border:1px dashed rgba(255,255,255,.25);color:#d8e6f3}
+.btn-chip{background:#0d1118;border:1px solid rgba(255,255,255,.15);cursor:pointer}
+.btn-chip.active{border-color:#2bb7ff}
+.nav{display:flex;gap:10px;justify-content:flex-end;margin-top:10px}
+
+.tabs{display:flex;gap:8px;margin-bottom:12px}
+.tab{background:#0d1118;border:1px solid rgba(255,255,255,.15);border-radius:12px;padding:8px 12px;cursor:pointer}
+.tab.active{border-color:#2bb7ff}
+
+.step-pane{display:none}
+.step-pane.active{display:block}
+
+.details-hint summary{cursor:pointer;font-weight:700}
+.details-hint{margin:8px 0}
+
+.soil-buttons,.sistema,.clima{display:flex;gap:8px;flex-wrap:wrap}
+
+.big-stats{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:4px 0 12px}
+.big{background:#0d1118;border:1px solid rgba(255,255,255,.10);border-radius:14px;padding:14px;text-align:center}
+.big-label{color:var(--muted);font-weight:700}
+.big-value{font-size:clamp(22px,4vw,36px);font-weight:900}
+
+.schedule{background:#0d1118;border:1px solid rgba(255,255,255,.10);border-radius:14px;padding:14px;margin:12px 0}
+.schedule .line{display:flex;gap:16px;flex-wrap:wrap;justify-content:space-between}
+.schedule .line span{font-weight:800}
+
+.stat{background:#0d1118;border:1px solid rgba(255,255,255,.10);border-radius:12px;padding:10px 12px}
+.stat .label{display:block;color:var(--muted);font-size:14px}
+.stat .value{display:block;font-weight:800;font-size:18px;margin-top:6px}
+
+.tips{margin:6px 0 0 16px}
+.footer{text-align:center;opacity:.75;padding-bottom:32px}
+
+.muted{color:var(--muted)}
+
+canvas{background:#0d1118;border:1px solid rgba(255,255,255,.10);border-radius:12px;padding:6px}

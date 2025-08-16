@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Água Certa — Irrigação Simples</title>
+  <link rel="stylesheet" href="./css/styles.css"/>
+
+</head>
+<body>
+  <header class="container head">
+    <h1>💧 Água Certa</h1>
+    <p class="subtitle">Calculadora de irrigação feita para o produtor — simples, rápida e econômica.</p>
+  </header>
+
+  <main class="container">
+    <div class="stepper" id="stepper">
+      <div class="step active" data-step="1"><span>1</span> Cultura</div>
+      <div class="step" data-step="2"><span>2</span> Solo</div>
+      <div class="step" data-step="3"><span>3</span> Área</div>
+      <div class="step" data-step="4"><span>4</span> Clima & Sistema</div>
+      <div class="step" data-step="5"><span>5</span> Resultado</div>
+    </div>
+
+    <!-- PASSO 1: CULTURA -->
+    <section class="card step-pane active" data-step="1">
+      <h2>Qual a cultura?</h2>
+      <div class="row">
+        <label for="crop">Escolha a cultura</label>
+        <select id="crop">
+          <option value="alface">Alface</option>
+          <option value="tomate" selected>Tomate</option>
+          <option value="milho">Milho</option>
+          <option value="soja">Soja</option>
+          <option value="feijao">Feijão</option>
+          <option value="outro">Outro (vou informar)</option>
+        </select>
+      </div>
+
+      <details class="details-hint">
+        <summary>Não sei dados técnicos — usar valores padrão</summary>
+        <div class="grid two">
+          <div>
+            <label for="kc">Quanto a cultura bebe (Kc)</label>
+            <input type="number" id="kc" step="0.01" min="0.3" max="1.3"/>
+            <small class="muted">Se não souber, deixo um valor bom para a cultura escolhida.</small>
+          </div>
+          <div>
+            <label for="rootDepth">Raiz (profundidade)</label>
+            <input type="number" id="rootDepth" step="0.1" min="0.1" max="2.5"/>
+            <small class="muted">Metros. Se não souber, uso um valor padrão.</small>
+          </div>
+        </div>
+      </details>
+
+      <div class="nav">
+        <button class="btn next">Próximo</button>
+      </div>
+    </section>
+
+    <!-- PASSO 2: SOLO -->
+    <section class="card step-pane" data-step="2">
+      <h2>Como é o solo?</h2>
+      <div class="soil-buttons">
+        <button class="soil btn-chip" data-soil="arenoso">🟠 Arenoso</button>
+        <button class="soil btn-chip active" data-soil="franco">🟤 Meio termo</button>
+        <button class="soil btn-chip" data-soil="argiloso">⬛ Argiloso</button>
+      </div>
+      <details class="details-hint">
+        <summary>Quero ajustar a retenção de água do solo</summary>
+        <div class="row">
+          <label for="cad">Retenção (CAD) do solo (mm por metro)</label>
+          <input type="number" id="cad" min="20" max="250" step="1" value="120"/>
+        </div>
+      </details>
+      <div class="nav">
+        <button class="btn back">Voltar</button>
+        <button class="btn next">Próximo</button>
+      </div>
+    </section>
+
+    <!-- PASSO 3: ÁREA -->
+    <section class="card step-pane" data-step="3">
+      <h2>Qual o tamanho plantado?</h2>
+      <div class="tabs" role="tablist">
+        <button class="tab active" data-tab="ha">Tenho em hectares</button>
+        <button class="tab" data-tab="canteiro">Quero medir o canteiro</button>
+      </div>
+
+      <div class="tab-pane active" data-tab="ha">
+        <div class="grid two">
+          <div>
+            <label for="areaHa">Área (ha)</label>
+            <input type="number" id="areaHa" step="0.01" min="0.01" value="0.10"/>
+          </div>
+          <div>
+            <label for="plants">Nº de plantas (opcional)</label>
+            <input type="number" id="plants" min="1" placeholder="Se não souber, calculo pra você"/>
+          </div>
+        </div>
+      </div>
+
+      <div class="tab-pane" data-tab="canteiro">
+        <div class="grid two">
+          <div>
+            <label for="len">Comprimento do canteiro (m)</label>
+            <input type="number" id="len" step="0.1" min="1" value="20"/>
+          </div>
+          <div>
+            <label for="wid">Largura do canteiro (m)</label>
+            <input type="number" id="wid" step="0.1" min="0.5" value="1.2"/>
+          </div>
+        </div>
+        <div class="grid two">
+          <div>
+            <label for="beds">Quantidade de canteiros</label>
+            <input type="number" id="beds" min="1" value="10"/>
+          </div>
+          <div>
+            <label for="areaAuto">Área total (m²)</label>
+            <input type="number" id="areaAuto" disabled/>
+          </div>
+        </div>
+        <details class="details-hint">
+          <summary>Não sei o nº de plantas — calcule pelo espaçamento</summary>
+          <div class="grid two">
+            <div>
+              <label for="rowSpacing">Espaço entre linhas (cm)</label>
+              <input type="number" id="rowSpacing" min="10" step="1" value="80"/>
+            </div>
+            <div>
+              <label for="plantSpacing">Espaço entre plantas na linha (cm)</label>
+              <input type="number" id="plantSpacing" min="10" step="1" value="40"/>
+            </div>
+          </div>
+          <div class="row">
+            <label for="plantsAuto">Nº de plantas estimado</label>
+            <input type="number" id="plantsAuto" disabled/>
+          </div>
+        </details>
+      </div>
+
+      <div class="nav">
+        <button class="btn back">Voltar</button>
+        <button class="btn next">Próximo</button>
+      </div>
+    </section>
+
+    <!-- PASSO 4: CLIMA E SISTEMA -->
+    <section class="card step-pane" data-step="4">
+      <h2>Clima do local e sistema de irrigação</h2>
+      <div class="grid two">
+        <div>
+          <label>Clima (ajuda a estimar a perda de água)</label>
+          <div class="clima">
+            <label><input type="radio" name="clima" value="frio"> Frio</label>
+            <label><input type="radio" name="clima" value="ameno" checked> Ameno</label>
+            <label><input type="radio" name="clima" value="quenteU"> Quente úmido</label>
+            <label><input type="radio" name="clima" value="quenteS"> Quente seco</label>
+          </div>
+          <label for="mes">Mês do ano</label>
+          <select id="mes">
+            <option value="1">Janeiro</option><option value="2">Fevereiro</option><option value="3">Março</option>
+            <option value="4">Abril</option><option value="5">Maio</option><option value="6">Junho</option>
+            <option value="7">Julho</option><option value="8" selected>Agosto</option><option value="9">Setembro</option>
+            <option value="10">Outubro</option><option value="11">Novembro</option><option value="12">Dezembro</option>
+          </select>
+          <div class="row">
+            <label for="eto">Perda diária (ETo) — posso estimar</label>
+            <input type="number" id="eto" step="0.1" min="0" max="15" />
+            <small class="muted">mm/dia (se deixar vazio, eu calculo pelo clima e mês)</small>
+          </div>
+        </div>
+        <div>
+          <label>Sistema de irrigação</label>
+          <div class="sistema">
+            <button class="btn-chip sys active" data-eff="0.90">💧 Gotejamento</button>
+            <button class="btn-chip sys" data-eff="0.75">🌧️ Aspersão</button>
+            <button class="btn-chip sys" data-eff="0.60">🚜 Sulcos</button>
+          </div>
+          <div class="grid two">
+            <div>
+              <label for="emit">Vazão por planta (L/h)</label>
+              <input type="number" id="emit" step="0.1" min="0" placeholder="ex: 1.6"/>
+            </div>
+            <div>
+              <label for="emitCount">Gotejadores por planta</label>
+              <input type="number" id="emitCount" min="1" value="1"/>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="nav">
+        <button class="btn back">Voltar</button>
+        <button class="btn next" id="btnCalc">Ver resultado</button>
+      </div>
+    </section>
+
+    <!-- PASSO 5: RESULTADO -->
+    <section class="card step-pane" data-step="5">
+      <h2>Recomendação simples</h2>
+      <div class="big-stats">
+        <div class="big">
+          <div class="big-label">Água por dia (total)</div>
+          <div class="big-value" id="outDailyVol">—</div>
+        </div>
+        <div class="big">
+          <div class="big-label">Por planta (dia)</div>
+          <div class="big-value" id="outPerPlant">—</div>
+        </div>
+      </div>
+
+      <div class="schedule">
+        <div class="line">
+          <span id="outInterval">—</span>
+          <span id="outEventVol">—</span>
+          <span id="outMinutes">—</span>
+        </div>
+        <small class="muted">*Minutos calculados com sua vazão por planta.</small>
+      </div>
+
+      <details class="details-hint">
+        <summary>Ver detalhes técnicos (para técnico/engenheiro)</summary>
+        <div class="grid three">
+          <div class="stat">
+            <span class="label">ETc</span><span class="value" id="outEtc">—</span>
+          </div>
+          <div class="stat">
+            <span class="label">Lâmina líquida (mm/dia)</span><span class="value" id="outNIR">—</span>
+          </div>
+          <div class="stat">
+            <span class="label">Lâmina bruta (mm/dia)</span><span class="value" id="outGIR">—</span>
+          </div>
+        </div>
+      </details>
+
+      <section class="card inner">
+        <h3>Economize água</h3>
+        <ul class="tips">
+          <li>Irrigue no começo da manhã ou fim da tarde.</li>
+          <li>Mantenha cobertura no solo (palhada/mulching).</li>
+          <li>Prefira gotejamento quando possível.</li>
+        </ul>
+      </section>
+
+      <div class="nav">
+        <button class="btn back">Voltar</button>
+        <button class="btn ghost" id="btnNovo">Novo cálculo</button>
+      </div>
+
+      <section class="card inner">
+        <h3>Como chegar nesse número</h3>
+        <canvas id="chartDailyVolume" height="120"></canvas>
+      </section>
+    </section>
+  </main>
+
+  <footer class="container footer">
+    <span>Água Certa — feito para o campo, com simplicidade.</span>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script><!-- se você tiver um api.js -->
+  <script type="module" src="./javascript/app.js" defer></script>   <!-- AQUI: de ../ para ./ -->
+
+</body>
+</html>
